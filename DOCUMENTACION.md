@@ -228,3 +228,53 @@ default:
 - Recorrer subdirectorios de forma recursiva.
 - Agregar pruebas unitarias para `loadImageFiles`, `selectRandomWithoutRepeats` y `detectMimeType`.
 - Migrar a `rand.New(rand.NewSource(...))` para desacoplar estado global de aleatoriedad.
+
+## 9. Ejecutable para Linux y Docker
+
+### 9.1 Generar ejecutable Linux desde Windows (PowerShell)
+
+Desde la raiz del proyecto:
+
+```powershell
+$env:GOOS="linux"
+$env:GOARCH="amd64"
+$env:CGO_ENABLED="0"
+go build -o server-linux .
+```
+
+Esto genera el binario `server-linux` para Linux x86_64.
+
+Si quieres limpiar variables de entorno despues:
+
+```powershell
+Remove-Item Env:GOOS
+Remove-Item Env:GOARCH
+Remove-Item Env:CGO_ENABLED
+```
+
+### 9.2 Construir imagen Docker
+
+El proyecto incluye `Dockerfile` multi-stage para compilar en Linux y empaquetar binario + recursos (`templates`, `static`, `imagenes`).
+
+```bash
+docker build -t laboratorio-go:latest .
+```
+
+### 9.3 Ejecutar contenedor Docker
+
+```bash
+docker run --rm -p 8000:8000 laboratorio-go:latest
+```
+
+Abrir en navegador:
+
+- `http://localhost:8000/`
+- `http://localhost:8000/hola`
+
+### 9.4 Usar una carpeta local de imagenes (opcional)
+
+Si quieres usar imagenes del host en vez de las incluidas en la imagen:
+
+```bash
+docker run --rm -p 8000:8000 -v "${PWD}/imagenes:/app/imagenes" laboratorio-go:latest
+```
