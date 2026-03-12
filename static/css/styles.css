@@ -1,0 +1,50 @@
+:root {
+  --hero-a: #1f2937;
+  --hero-b: #0f766e;
+  --accent: #f59e0b;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #dbeafe, #ecfeff 45%, #f8fafc 80%);
+}
+
+.main-content {
+  flex: 1;
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--hero-a), var(--hero-b));
+  color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.18);
+}
+
+.hero .badge {
+  background-color: var(--accent);
+  color: #111827;
+  font-weight: 600;
+}
+
+.hostname {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #0f172a;
+}
+
+.thumb {
+  border-radius: 0.7rem;
+  box-shadow: 0 8px 18px rgba(30, 41, 59, 0.12);
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  background: #e2e8f0;
+}
+
+.page-footer {
+  background: rgba(15, 23, 42, 0.92);
+  color: #f8fafc;
+}
