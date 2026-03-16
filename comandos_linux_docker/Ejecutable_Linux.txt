@@ -5,3 +5,27 @@ go build -o server-linux .
 Remove-Item Env:GOOS
 Remove-Item Env:GOARCH
 Remove-Item Env:CGO_ENABLED
+
+
+$env:GOOS="linux"
+Define el sistema operativo destino (GOOS) como Linux.
+Sin esto, Go compilaria para tu sistema actual (Windows).
+
+$env:GOARCH="amd64"
+Define la arquitectura destino como amd64 (x86_64, 64 bits).
+Es la arquitectura comun de PCs y muchas VMs.
+
+$env:CGO_ENABLED="0"
+Desactiva CGO para generar un binario mas portable (sin dependencias C del sistema).
+Esto evita muchos problemas al mover el ejecutable entre maquinas Linux.
+
+go build -o server-linux .
+Compila el modulo actual (.) y crea el ejecutable con nombre server-linux.
+Como ya definiste GOOS y GOARCH, ese binario queda para Linux/amd64.
+
+Remove-Item Env:GOOS
+
+Remove-Item Env:GOARCH
+
+Remove-Item Env:CGO_ENABLED
+Limpian esas variables del entorno de PowerShell para que no afecten compilaciones futuras.
